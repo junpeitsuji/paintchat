@@ -36,7 +36,7 @@ $(function() {
   
   function clear(){
     var canvas = document.getElementById('myCanvas');
-    if (!ctx){
+    if (!ctx) {
       ctx = canvas.getContext('2d');
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -48,7 +48,7 @@ $(function() {
   }
 
   function draw(penX, penY){
-    if (!ctx){
+    if (!ctx) {
       var canvas = document.getElementById('myCanvas');
       ctx = canvas.getContext('2d');
     }

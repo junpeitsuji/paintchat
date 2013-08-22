@@ -27,7 +27,7 @@ $(function() {
   // チャットサーバーから msg push されたとき
   chat.on('msg push', function (msg) {
     var date = new Date();
-    $('#chat #list').prepend($('<dt>' + date + '</dt><dd>' + msg + '</dd>'));
+    $('#chat #list').prepend($('<dt>' + date + '</dt><dd>' + msg + '</dd>').css("display", "none").fadeIn("slow"));
   });
 
   // チャットサーバーから DB を受け取りすべてを表示
@@ -38,7 +38,7 @@ $(function() {
     } else {
       $('#chat #list').empty();
       $.each(msg, function(key, value){
-        $('#chat #list').prepend($('<dt>' + value.date + '</dt><dd>' + value.message + '</dd>'));
+        $('#chat #list').prepend($('<dt>' + value.date + '</dt><dd>' + value.message + '</dd>')).css("display", "none").fadeIn("slow");
       });   
     }
   });
