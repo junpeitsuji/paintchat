@@ -1,5 +1,12 @@
 $(function() {
 
+  $("#message").focus().keypress( function ( e ) {
+    if ( e.which == 13 ) {
+      $("#chat #submit").click();
+      return false;
+    }
+  });
+
   var paint = io.connect('http://'+location.host+'/paint');
   
   var mouseDown = false;
