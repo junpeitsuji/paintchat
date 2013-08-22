@@ -25,6 +25,19 @@ $(function() {
     }
   });
 
+  // チャットサーバーから DB を受け取りすべてを表示
+  paint.on('img open', function(msg){
+    // DB が空っぽだったら
+    if(msg.length == 0){
+        return;
+    } else {
+      $('#image #list').empty();
+      $.each(msg, function(key, value){
+        $('#image #list').prepend($("<div class=\"image-box span4\"><a href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a></div>").css("display", "none").fadeIn("slow"));
+      });   
+    }
+  });
+
   // paint サーバーから msg push されたとき
   paint.on('msg push', function (msg) {
     draw(msg.x, msg.y);
@@ -158,17 +171,23 @@ $(function() {
     var canvas = document.getElementById('myCanvas');
     try {
       var img_src = canvas.toDataURL();
-      document.getElementById("canvasCopy").innerHTML = "<a href=\""+img_src+"\">download link</a>";
-      //document.getElementById("image_png").src = img_png_src;
-      //document.getElementById("data_url_png").firstChild.nodeValue = img_png_src;
+
+      paint.emit('img send', img_src);
     } catch(e) {
-      //document.getElementById("image_png").alt = "未対応";
     }
+  });
+
+
+  // paint サーバーから img push されたとき
+  paint.on('img push', function (msg) {
+    //document.getElementById("canvasCopy").pre = "<a href=\""+msg+"\">download link</a>";
+    var date = new Date();
+    $('#image #list').prepend($("<div class=\"image-box span4\"><a href=\""+msg+"\"><img src=\""+msg+"\" class=\"image-thumbnail\" /></a></div>").css("display", "none").fadeIn("slow"));
   });
 
   // delete ボタンがクリックされたとき
   $('#canvas #delete').click(function(){
-     myRet = confirm("本当にキャンバスを削除してもよいですか？");
+     myRet = confirm("本当にキャンバスをクリアしてもよいですか？");
      if ( myRet == true ){
        paint.emit('deleteDB');
      }else{

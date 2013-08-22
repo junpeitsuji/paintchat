@@ -2,6 +2,8 @@
  * Module dependencies.
  */
 
+var fs = require('fs');
+
 var express = require('express');
 var routes = require('./routes');
 var path = require('path');
@@ -58,10 +60,20 @@ server.listen(app.get('port'), function(){
   mongoose.model('Paint', PaintSchema);
 }
 
+{
+  var Schema = mongoose.Schema;
+  var ImageSchema = new Schema({
+  	src: String,
+    date: Date
+  });
+  mongoose.model('Image', ImageSchema);
+}
+
 mongoose.connect('mongodb://localhost/chat_app');
 
 var Chat = mongoose.model('Chat');
 var Paint = mongoose.model('Paint');
+var Image = mongoose.model('Image');
 
 
 
@@ -120,6 +132,9 @@ var paint = io
 	  	Paint.find(function(err, docs){
 	  	  socket.emit('msg open', docs);
 	  	});
+	  	Image.find(function(err, docs){
+	  	  socket.emit('img open', docs);
+	  	});
 	  });
 
 	  console.log('connected');
@@ -139,6 +154,41 @@ var paint = io
 	  	item.save(function(err) {
 	  	  if (err) { console.log(err); }
 	  	});
+	  });
+
+	  // クライアントから送信された画像を保存
+	  socket.on('img send', function (msg) {
+	  	msg = new Buffer(msg.replace("data:image/png;base64,", ""), 'base64');
+
+	  	// 今日の日付で Date オブジェクトを作成
+        var now = new Date();
+
+        // 「年」「月」「日」「曜日」を Date オブジェクトから取り出してそれぞれに代入
+        var Y = now.getFullYear();
+        var M = now.getMonth() + 1 + Y * 100;
+        var D = now.getDate() + M * 100;
+        var h = now.getHours() + D * 100;
+        var m = now.getMinutes() + h * 100;
+        var s = now.getSeconds() + m * 100;
+
+        var filename = 'images/'+ String(s) + '.png';
+
+        fs.writeFile('./public/'+filename, msg, function (err) {
+          if (err) throw err;
+          //console.log('It\'s saved!');
+
+
+	  	  // DB に登録
+	  	  var item = new Image();
+	  	  item.src = filename;
+	  	  item.date = new Date();
+	  	  item.save(function(err) {
+	  	    if (err) { console.log(err); }
+   	  	  });
+
+     	  socket.emit('img push', filename);
+     	  socket.broadcast.emit('img push', filename);
+        });
 	  });
 
 	  // DB にあるメッセージを削除

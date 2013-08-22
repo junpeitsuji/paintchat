@@ -11,6 +11,11 @@
     canvas {
       border: solid 1px #999;
     }
+    .image-box { 
+      border: solid 1px #999;
+    }
+    .image-thumbnail { 
+    }
     </style>
   </head>
   <body>
@@ -28,7 +33,7 @@
         <span id="canvasCopy">
         </span>
         <button id="save" class="btn btn-large btn-primary">キャンバスを保存</button>
-        <button id="delete" class="btn btn-large btn-danger">削除</button>
+        <button id="delete" class="btn btn-large btn-danger">キャンパスをクリア</button>
       </div>
       <div id="chat" class="row">
         <h3>chat</h3>
@@ -39,6 +44,11 @@
           <button id="delete" class="btn btn-danger">削除</button>
         </span>
         <dl id="list"></dl>
+      </div>
+      <div id="image" class="row">
+        <h3>canvas histories</h3>
+        <div id="list" class="row">
+        </div>
       </div>
     </div>
   </body>
