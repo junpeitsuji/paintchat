@@ -41,6 +41,10 @@ $(function() {
     }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    ctx.beginPath();
+    ctx.fillStyle = "#eeeeee";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   }
 
   function draw(penX, penY){
