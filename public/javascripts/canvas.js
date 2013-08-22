@@ -6,6 +6,7 @@ $(function() {
   var penWidth = 10;
   var ctx;
 
+  clear();
 
   // サーバーの接続が成功したとき
   paint.on('connect', function() {
