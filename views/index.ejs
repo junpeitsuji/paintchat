@@ -12,39 +12,59 @@
     canvas {
       border: solid 1px #999;
     }
+    #header {
+      border-bottom: solid 1px #999;
+      padding-top:8px;
+      padding-bottom:8px;
+      margin-bottom:16px;
+    }
+    #header #title{
+      padding-bottom:8px;
+    }
+    #canvas-main {
+      margin-bottom:24px;
+      padding-bottom:8px;
+    }
+    #canvas-stored {
+      margin-bottom:24px;
+    }
     .image-box { 
       border: solid 1px #999;
-    }
-    .image-thumbnail { 
     }
     </style>
   </head>
   <body>
       
     <div class="container">
-      <div class="row">
-        <h1 class="text-info"><%= title %></h1>
+      <div id="header" class="row">
+        <div id="title">
+          <h1 class="text-info"><%= title %></h1>
+        </div>
         <p><%= title %> は <a href="http://nodejs.org/" target="_blank">node.js</a> を用いたリアルタイムお絵かきチャットのサンプルアプリです。　github: <a href="https://github.com/junpeitsuji/paintchat" target="_blank">https://github.com/junpeitsuji/paintchat</a></p>
       </div>      
       <div class="row">
         <div id="canvas" class="span9">
-          <div class="row">
-            <h3>canvas</h3>
+          <div id="canvas-main">
+            <div class="row">
+              <h3>canvas</h3>
+            </div>
+            <div class="row">
+              <canvas id="myCanvas" width="720" height="480"></canvas>
+            </div>
+            <div class="row">
+              <button id="save" class="btn btn-large btn-primary">キャンバスを保存</button>
+              <button id="delete" class="btn btn-large btn-danger">キャンパスをクリア</button>
+            </div>
           </div>
-          <div class="row">
-            <canvas id="myCanvas" width="720" height="480"></canvas>
-          </div>
-          <div class="row">
-            <button id="save" class="btn btn-large btn-primary">キャンバスを保存</button>
-            <button id="delete" class="btn btn-large btn-danger">キャンパスをクリア</button>
-          </div>
-          <div class="row">
-            <h4>保存したキャンバスの画像</h4>
-          </div>
-          <div class="row">
-            <div id="image">
-              <ul id="list" class="thumbnails">
-              </ul>
+          <div id="canvas-stored">
+            <div class="row">
+              <h4>保存したキャンバスの画像</h4>
+            </div>
+            <div class="row">
+              <div id="image">
+                <ul id="list" class="thumbnails">
+                </ul>
+              </div>
             </div>
           </div>
         </div>
