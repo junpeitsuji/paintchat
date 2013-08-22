@@ -1,9 +1,6 @@
 $(function() {
 
   var paint = io.connect('http://'+location.host+'/paint');
-
-  var canvas_x = $("#myCanvas").offset().left; //canvasのX座標
-  var canvas_y = $("#myCanvas").offset().top;  //canvasのY座標
   
   var mouseDown = false;
   var penWidth = 10;
@@ -63,6 +60,10 @@ $(function() {
   $("#myCanvas").bind("mousemove", function(event){
     // マウスボタンを押している場合は描画する
     if (mouseDown){
+
+      var canvas_x = $("#myCanvas").offset().left; //canvasのX座標
+      var canvas_y = $("#myCanvas").offset().top;  //canvasのY座標
+    
       // マウス座標とCanvasの座標を適当に調整
       var penX = event.pageX - canvas_x;
       var penY = event.pageY - canvas_y;
@@ -80,6 +81,9 @@ $(function() {
 
   
   $("#myCanvas").bind("mousedown", function(event){
+      var canvas_x = $("#myCanvas").offset().left; //canvasのX座標
+      var canvas_y = $("#myCanvas").offset().top;  //canvasのY座標
+
       // マウス座標とCanvasの座標を適当に調整
       var penX = event.pageX - canvas_x;
       var penY = event.pageY - canvas_y;
@@ -106,6 +110,9 @@ $(function() {
     event.preventDefault();
     // マウスボタンを押している場合は描画する
     if (mouseDown){
+      var canvas_x = $("#myCanvas").offset().left; //canvasのX座標
+      var canvas_y = $("#myCanvas").offset().top;  //canvasのY座標
+
       // マウス座標とCanvasの座標を適当に調整
       var penX = event.originalEvent.touches[0].pageX - canvas_x;
       var penY = event.originalEvent.touches[0].pageY - canvas_y;
@@ -124,6 +131,9 @@ $(function() {
   
   $("#myCanvas").bind("touchstart", function(event){
     event.preventDefault();
+
+    var canvas_x = $("#myCanvas").offset().left; //canvasのX座標
+    var canvas_y = $("#myCanvas").offset().top;  //canvasのY座標
 
     // マウス座標とCanvasの座標を適当に調整
     var penX = event.originalEvent.touches[0].pageX - canvas_x;
