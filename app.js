@@ -36,5 +36,11 @@ server.listen(app.get('port'), function(){
 });
 
 
+var models   = require('./models');
+
+app.set('models', models);
 app.set('io', io);
-require('./apps/socketio');
+
+require('./apps/chat');
+require('./apps/paint');
+
