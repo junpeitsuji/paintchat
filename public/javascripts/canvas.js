@@ -33,7 +33,7 @@ $(function() {
     } else {
       $('#image #list').empty();
       $.each(msg, function(key, value){
-        $('#image #list').prepend($("<div class=\"image-box span4\"><a href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a></div>").css("display", "none").fadeIn("slow"));
+        $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a></li>").css("display", "none").fadeIn("slow"));
       });   
     }
   });
@@ -182,7 +182,7 @@ $(function() {
   paint.on('img push', function (msg) {
     //document.getElementById("canvasCopy").pre = "<a href=\""+msg+"\">download link</a>";
     var date = new Date();
-    $('#image #list').prepend($("<div class=\"image-box span4\"><a href=\""+msg+"\"><img src=\""+msg+"\" class=\"image-thumbnail\" /></a></div>").css("display", "none").fadeIn("slow"));
+    $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+msg+"\"><img src=\""+msg+"\" class=\"image-thumbnail\" /></a></li>").css("display", "none").fadeIn("slow"));
   });
 
   // delete ボタンがクリックされたとき
