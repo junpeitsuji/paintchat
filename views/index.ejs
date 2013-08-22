@@ -25,11 +25,23 @@
       margin-bottom:24px;
       padding-bottom:8px;
     }
+    #div-canvas {
+      margin-bottom:8px;
+    }
     #canvas-stored {
       margin-bottom:24px;
     }
     .image-box { 
       border: solid 1px #999;
+    }
+    #chat-form {
+      background-color: #eee;
+      border: solid 1px #999;
+      padding: 8px 8px 8px 8px;
+    }
+    #chat-history-title {
+      padding-top:24px;
+      border-bottom: solid 1px #999;
     }
     </style>
   </head>
@@ -46,9 +58,9 @@
         <div id="canvas" class="span9">
           <div id="canvas-main">
             <div class="row">
-              <h3>canvas</h3>
+              <h3>キャンバス</h3>
             </div>
-            <div class="row">
+            <div id="div-canvas" class="row">
               <canvas id="myCanvas" width="720" height="480"></canvas>
             </div>
             <div class="row">
@@ -69,13 +81,17 @@
           </div>
         </div>
         <div id="chat" class="span3">
-          <h3>chat</h3>
-          <span class="form-inline">
-            <input class="input-large" type="text" name="message" id="message" />
-            <button id="submit" class="btn btn-primary">送信</button>
-            <button id="delete" class="btn btn-danger">削除</button>
-          </span>
-          <h4>チャット履歴</h4>
+          <h3>テキストチャット</h3>
+          <div id="chat-form">
+            <span class="form-inline">
+              <input class="input-large" type="text" name="message" id="message" />
+              <button id="submit" class="btn btn-primary">送信</button>
+              <button id="delete" class="btn btn-danger">削除</button>
+            </span>
+          </div>
+          <div id="chat-history-title">
+            <h4>チャット履歴</h4>
+          </div>
           <dl id="list"></dl>
         </div>
       </div>
