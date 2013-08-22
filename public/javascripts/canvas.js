@@ -139,6 +139,18 @@ $(function() {
 
   });
 
+ // save ボタンがクリックされたとき
+  $('#canvas #save').click(function(){
+    var canvas = document.getElementById('myCanvas');
+    try {
+      var img_src = canvas.toDataURL();
+      document.getElementById("canvasCopy").innerHTML = "<a href=\""+img_src+"\">download link</a>";
+      //document.getElementById("image_png").src = img_png_src;
+      //document.getElementById("data_url_png").firstChild.nodeValue = img_png_src;
+    } catch(e) {
+      //document.getElementById("image_png").alt = "未対応";
+    }
+  });
 
   // delete ボタンがクリックされたとき
   $('#canvas #delete').click(function(){
