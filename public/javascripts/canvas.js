@@ -37,6 +37,7 @@ $(function() {
   paint.on('img open', function(msg){
     // DB が空っぽだったら
     if(msg.length == 0){
+      $('#image #list').empty();
         return;
     } else {
       $('#image #list').empty();

@@ -4,6 +4,7 @@ var app      = module.parent.exports
   , io       = app.get('io')
   , models   = app.get('models')
   , fs       = require('fs')
+  , path     = require("path")
   , sanitize = require('validator').sanitize;
 
 var Paint = models.Paint;
@@ -94,6 +95,13 @@ var paint = io
 	  	console.log(msg);
 
 	  	Image.remove({ src: msg.src }, function(err) {
+
+		  if( path.existsSync('./public/'+msg.src) ) {
+	  	    fs.unlink('./public/'+msg.src, function (err2) {
+              if (err2) throw err2;
+              console.log('ファイル削除完了'+msg.src);
+            });
+		  }
 		  // ...
 		  Image.find(function(err, docs){
 	  	  	socket.emit('img open', docs);
