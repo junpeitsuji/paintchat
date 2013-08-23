@@ -15,6 +15,7 @@ $(function() {
     $('#chat #message').val('');
   });
 
+/*
   // delete ボタンがクリックされたとき
   $('#chat #delete').click(function(){
     myRet = confirm("本当にチャット履歴をすべて削除してもよいですか？");
@@ -23,6 +24,7 @@ $(function() {
     }else{
     }
   });
+*/
 
   // チャットサーバーから msg push されたとき
   chat.on('msg push', function (msg) {
