@@ -136,7 +136,10 @@ $(function() {
 
   });
 
+  $("#myCanvas").bind("mouseout", function(event){
+    mouseDown = false;    
 
+  });
 
   $("#myCanvas").bind("touchmove", function(event){
     event.preventDefault();
