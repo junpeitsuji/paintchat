@@ -27,6 +27,8 @@ $(function() {
   // チャットサーバーから msg push されたとき
   chat.on('msg push', function (msg) {
     var date = new Date();
+    msg = msg.replace(/(http:\/\/[\x21-\x7e]+)/gi, "<a href='$1'>$1</a>");  
+    msg = msg.replace(/(https:\/\/[\x21-\x7e]+)/gi, "<a href='$1'>$1</a>");  
     $('#chat #list').prepend($('<dt>' + date + '</dt><dd>' + msg + '</dd>').css("display", "none").fadeIn("slow"));
   });
 
@@ -38,6 +40,9 @@ $(function() {
     } else {
       $('#chat #list').empty();
       $.each(msg, function(key, value){
+        value.message = value.message.replace(/(http:\/\/[\x21-\x7e]+)/gi, "<a href='$1'>$1</a>");  
+        value.message = value.message.replace(/(https:\/\/[\x21-\x7e]+)/gi, "<a href='$1'>$1</a>");  
+
         $('#chat #list').prepend($('<dt>' + value.date + '</dt><dd>' + value.message + '</dd>')).css("display", "none").fadeIn("slow");
       });   
     }
