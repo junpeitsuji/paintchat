@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/chat_app');
     date: Date
   });
   mongoose.model('Chat', ChatSchema);
+  exports.Chat = mongoose.model('Chat');
 }
 
 {
@@ -20,6 +21,7 @@ mongoose.connect('mongodb://localhost/chat_app');
     date: Date
   });
   mongoose.model('Paint', PaintSchema);
+  exports.Paint = mongoose.model('Paint');
 }
 
 {
@@ -29,12 +31,6 @@ mongoose.connect('mongodb://localhost/chat_app');
     date: Date
   });
   mongoose.model('Image', ImageSchema);
+  exports.Image = mongoose.model('Image');
 }
 
-var Chat = mongoose.model('Chat');
-var Paint = mongoose.model('Paint');
-var Image = mongoose.model('Image');
-
-exports.Chat = Chat;
-exports.Paint = Paint;
-exports.Image = Image;

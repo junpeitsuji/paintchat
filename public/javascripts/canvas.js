@@ -2,6 +2,7 @@ $(function() {
 
   $("#message").focus().keypress( function ( e ) {
     if ( e.which == 13 ) {
+      // エンターが押されたとき、チャットの投稿ボタンをクリックする
       $("#chat #submit").click();
       return false;
     }

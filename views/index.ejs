@@ -36,17 +36,43 @@
     #chat-form {
       background-color: #eee;
       border: solid 1px #999;
+      margin-bottom: 24px;
+      /* padding: 8px 8px 8px 8px; */
+    }
+    #chat-form-box {
       padding: 8px 8px 8px 8px;
     }
     #chat-history-title {
-      padding-top:24px;
       border-bottom: solid 1px #999;
+    }
+    #chat li {
+      /* margin-left:0px; */
+      list-style-type: none;
+      border: solid 1px #ddd;
+      margin-top: 8px;
+      /* margin-bottom: 8px; */
+      /* padding: 8px 0px 8px 0px; */
     }
     .thumbnail-icon-trash {
       float: right;
     }
     .thumbnail-title {
       float: left;
+    }
+    .chat-list-border {
+      border: solid 1px #ddd;
+    }
+    .chat-list-box {
+      padding: 8px 8px 8px 8px;
+    }
+    .chat-list-text {
+      border-bottom: solid 1px #ddd;
+    }
+    .chat-list-date {
+      float: left;
+    }
+    .chat-list-icon {
+      float: right;
     }
     </style>
   </head>
@@ -87,17 +113,39 @@
         </div>
         <div id="chat" class="span3">
           <h3>テキストチャット</h3>
-          <div id="chat-form">
-            <input class="input-large" type="text" name="message" id="message" />
-            <span class="form-inline">
-              <button id="submit" class="btn btn-primary">送信</button>
-              <button id="delete" class="btn btn-danger">削除</button>
-            </span>
+          <div class="row">
+            <div id="chat-form" class="span3">
+              <div id="chat-form-box" class="row">
+                <span class="span3">
+                  <input class="input-large" type="text" name="message" id="message" />
+                </span>
+                <span class="span3 form-inline">
+                  <button id="submit" class="btn btn-primary">送信</button>
+                  <button id="delete" class="btn btn-danger">削除</button>
+                </span>
+              </div>
+            </div>
           </div>
           <div id="chat-history-title">
             <h4>チャット履歴</h4>
           </div>
-          <dl id="list"></dl>
+          <ul id="list" class="row"></ul>
+          <!--
+          <div class="row">
+            <h3>テキストチャット</h3>
+            <div id="chat-form">
+              <input class="input-large" type="text" name="message" id="message" />
+              <span class="form-inline">
+                <button id="submit" class="btn btn-primary">送信</button>
+                <button id="delete" class="btn btn-danger">削除</button>
+              </span>
+            </div>
+            <div id="chat-history-title">
+              <h4>チャット履歴</h4>
+            </div>
+            <ul id="list"></ul>
+          </div>
+        -->
         </div>
       </div>
     </div>

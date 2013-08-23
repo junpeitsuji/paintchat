@@ -28,8 +28,6 @@ var chat = io
 	  socket.on('msg send', function (msg) {
         msg = sanitize(msg).entityEncode();
 
-	  	socket.emit('msg push', msg);
-	  	socket.broadcast.emit('msg push', msg);
 
 	  	// DB に登録
 	  	var item = new Chat();
@@ -37,6 +35,11 @@ var chat = io
 	  	item.date = new Date();
 	  	item.save(function(err) {
 	  	  if (err) { console.log(err); }
+
+	  	  //item._id = instance._id; 
+
+	  	  socket.emit('msg push', item);
+	  	  socket.broadcast.emit('msg push', item);
 	  	});
 	  });
 
@@ -45,6 +48,23 @@ var chat = io
 	  	socket.emit('db drop');
 	  	socket.broadcast.emit('db drop');
 	  	Chat.find().remove();
+	  });
+
+	  	  // DB にある画像を1つ削除
+	  socket.on('msg delete', function (msg) {
+	  	//socket.emit('db drop');
+	  	//socket.broadcast.emit('db drop');
+	  	//Paint.find().remove();
+	  	console.log(msg);
+
+	  	Chat.remove({ _id: msg._id }, function(err) {
+
+		  // ...
+		  Chat.find(function(err, docs){
+	  	  	socket.emit('msg open', docs);
+	  	  	socket.broadcast.emit('msg open', docs);
+		  });
+		});
 	  });
 
 	  // クライアントから接続が切断されたとき
