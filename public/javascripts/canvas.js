@@ -41,9 +41,19 @@ $(function() {
     } else {
       $('#image #list').empty();
       $.each(msg, function(key, value){
-        $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a></li>").css("display", "none").fadeIn("slow"));
+        $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a><span class=\"muted thumbnail-title\"><small>"+value.src+"</small></span><span id=\""+value.src+"\" class=\"thumbnail-icon-trash\"><i class=\"icon-trash\"></i></span></li>").css("display", "none").fadeIn("slow"));
       });   
     }
+
+    // delete ボタンがクリックされたとき
+    $('.thumbnail-icon-trash').click(function(){
+      var src = $(this).attr("id");
+      var json = {
+        src: src
+      };
+      //console.log(json);
+      paint.emit('img delete', json);
+    });
   });
 
   // paint サーバーから msg push されたとき
@@ -190,7 +200,18 @@ $(function() {
   paint.on('img push', function (msg) {
     //document.getElementById("canvasCopy").pre = "<a href=\""+msg+"\">download link</a>";
     var date = new Date();
-    $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+msg+"\"><img src=\""+msg+"\" class=\"image-thumbnail\" /></a></li>").css("display", "none").fadeIn("slow"));
+    $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+msg+"\"><img src=\""+msg+"\" class=\"image-thumbnail\" /></a><span class=\"muted thumbnail-title\"><small>"+msg+"</small></span><span id=\""+msg+"\" class=\"thumbnail-icon-trash\"><i class=\"icon-trash\"></i></span></li>").css("display", "none").fadeIn("slow"));
+
+      // delete ボタンがクリックされたとき
+    $('.thumbnail-icon-trash').click(function(){
+      var src = $(this).attr("id");
+      var json = {
+        src: src
+      };
+      //console.log(json);
+      paint.emit('img delete', json);
+    });
+
   });
 
   // delete ボタンがクリックされたとき

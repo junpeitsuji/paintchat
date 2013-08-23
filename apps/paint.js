@@ -86,6 +86,22 @@ var paint = io
 	  	Paint.find().remove();
 	  });
 
+	  // DB にある画像を1つ削除
+	  socket.on('img delete', function (msg) {
+	  	//socket.emit('db drop');
+	  	//socket.broadcast.emit('db drop');
+	  	//Paint.find().remove();
+	  	console.log(msg);
+
+	  	Image.remove({ src: msg.src }, function(err) {
+		  // ...
+		  Image.find(function(err, docs){
+	  	  	socket.emit('img open', docs);
+	  	  	socket.broadcast.emit('img open', docs);
+		  });
+		});
+	  });
+
 	  // クライアントから接続が切断されたとき
 	  socket.on('disconnect', function() {
 	  	console.log('disconnected');
