@@ -111,6 +111,7 @@ $(function() {
   }  
 
   $("#myCanvas").bind("mousemove", function(event){
+
     // マウスボタンを押している場合は描画する
     if (mouseDown){
 
@@ -129,7 +130,6 @@ $(function() {
       paint.emit('msg send', json);
 
     }
-
   });
 
   
@@ -149,7 +149,7 @@ $(function() {
       paint.emit('msg send', json);
 
     mouseDown = true;
-
+    return false;
   });
 
   $("#myCanvas").bind("mouseup", function(event){
