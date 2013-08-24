@@ -8,13 +8,24 @@ var app      = module.parent.exports
 
 var Chat = models.Chat;
 
+var user_count = 0;
 
 // socket
 var chat = io
 	.of('/chat')
 	.on('connection', function (socket) {
+	  
 	  console.log(socket.id);
-	  socket.broadcast.emit('user connected', socket.id);
+	  user_count++;
+
+	  var msg = 
+	  socket.emit('user connected', {
+	  	count: user_count
+	  });
+	  socket.broadcast.emit('user connected', {
+	  	id: socket.id, 
+	  	count: user_count
+	  });
 
 	  // クライアントから msg update が届いたとき、DB内のメッセージを取得して送信
 	  socket.on('msg update', function(){
@@ -71,7 +82,13 @@ var chat = io
 
 	  // クライアントから接続が切断されたとき
 	  socket.on('disconnect', function() {
-	  	socket.broadcast.emit('user disconnected', socket.id);
+	  	user_count--;
+
+	    socket.broadcast.emit('user disconnected', {
+	  	  id: socket.id, 
+	  	  count: user_count
+	    });
+
 	  	console.log('disconnected');
 	  });
 

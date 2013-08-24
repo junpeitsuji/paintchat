@@ -9,14 +9,23 @@ $(function() {
   });
 
   chat.on('user connected', function (msg) {
-    var obj = $('#chat-alert').html('<small>'+msg+' さんが入室しました。</small>').css('display', 'none').fadeIn('slow');
+    var obj;
+    if(typeof msg.id === "undefined"){
+      obj = $('#chat-alert').html('あなた が入室しました。</small>').css('display', 'none').fadeIn('slow');
+    }
+    else{
+      obj = $('#chat-alert').html('<small>'+msg.id+' さんが入室しました。</small>').css('display', 'none').fadeIn('slow');
+    }
+    $('#chat-user-count').html('<small>現在の人数: '+msg.count+' 人</small>');
+
     setTimeout(function () {
       obj.fadeOut('slow');
     } ,3000);
   });
 
   chat.on('user disconnected', function (msg) {
-    var obj = $('#chat-alert').html('<small>'+msg+' さんが退室しました。</small>').css('display', 'none').fadeIn('slow');
+    var obj = $('#chat-alert').html('<small>'+msg.id+' さんが退室しました。</small>').css('display', 'none').fadeIn('slow');
+    $('#chat-user-count').html('<small>現在の人数: '+msg.count+' 人</small>');
     setTimeout(function () {
       obj.fadeOut('slow');
     } ,3000);
