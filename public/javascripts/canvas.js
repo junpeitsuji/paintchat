@@ -43,7 +43,7 @@ $(function() {
     } else {
       $('#image #list').empty();
       $.each(msg, function(key, value){
-        $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a><span class=\"muted thumbnail-title\"><small>"+value.src+"</small></span><span id=\""+value.src+"\" class=\"thumbnail-icon-trash\"><i class=\"icon-trash\"></i></span></li>").css("display", "none").fadeIn("slow"));
+        $('#image #list').append($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a><span class=\"muted thumbnail-title\"><small>"+value.src+"</small></span><span id=\""+value.src+"\" class=\"thumbnail-icon-trash\"><i class=\"icon-trash\"></i></span></li>").css("display", "none").fadeIn("slow"));
       });   
     }
 

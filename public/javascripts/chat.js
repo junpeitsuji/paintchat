@@ -104,7 +104,7 @@ $(function() {
             + '</li>';
 
         //$('#chat #list').prepend($('<dt>' + value.date + '</dt><dd>' + value.message + '</dd>')).css("display", "none").fadeIn("slow");
-        $('#chat #list').prepend($(html)).css("display", "none").fadeIn("slow");
+        $('#chat #list').append($(html)).css("display", "none").fadeIn("slow");
       });   
     
       $('.chat-list-icon').click(function(){

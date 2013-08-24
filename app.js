@@ -30,6 +30,16 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
+
+var models   = require('./models');
+
+var page_limit = 24;
+
+app.set('models', models);
+app.set('io', io);
+app.set('page_limit', page_limit);
+
+
 app.get('/', routes.index);
 //app.get('/users', user.list);
 
@@ -37,11 +47,6 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-
-var models   = require('./models');
-
-app.set('models', models);
-app.set('io', io);
 
 require('./apps/chat');
 require('./apps/paint');

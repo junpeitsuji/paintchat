@@ -5,7 +5,8 @@ var app      = module.parent.exports
   , models   = app.get('models')
   , fs       = require('fs')
   , path     = require("path")
-  , sanitize = require('validator').sanitize;
+  , sanitize = require('validator').sanitize
+  , page_limit = app.get('page_limit');
 
 var Paint = models.Paint;
 var Image = models.Image;
@@ -21,7 +22,11 @@ var paint = io
 	  	Paint.find(function(err, docs){
 	  	  socket.emit('msg open', docs);
 	  	});
-	  	Image.find(function(err, docs){
+
+	  	var query = Image.find();
+	  	query.sort( { date : -1 } );
+	  	query.limit(page_limit);
+	  	query.exec(function(err, docs){
 	  	  socket.emit('img open', docs);
 	  	});
 	  });
@@ -103,7 +108,11 @@ var paint = io
             });
 		  }
 		  // ...
-		  Image.find(function(err, docs){
+
+	  	  var query = Image.find();
+	  	  query.sort( { date : -1 } );
+	  	  query.limit(page_limit);
+		  query.exec(function(err, docs){
 	  	  	socket.emit('img open', docs);
 	  	  	socket.broadcast.emit('img open', docs);
 		  });

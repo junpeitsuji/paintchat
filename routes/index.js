@@ -4,5 +4,6 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'お絵かきチャット.js' });
+  var page_limit = module.parent.exports.set('page_limit');
+  res.render('index', { title: 'お絵かきチャット.js', page_limit: page_limit });
 };

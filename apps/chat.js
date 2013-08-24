@@ -3,7 +3,8 @@
 var app      = module.parent.exports
   , io       = app.get('io')
   , models   = app.get('models')
-  , sanitize = require('validator').sanitize;
+  , sanitize = require('validator').sanitize
+  , page_limit = app.get('page_limit');
 
 
 var Chat = models.Chat;
@@ -30,7 +31,10 @@ var chat = io
 	  // クライアントから msg update が届いたとき、DB内のメッセージを取得して送信
 	  socket.on('msg update', function(){
 	  	//接続したらDBのメッセージを表示
-	  	Chat.find(function(err, docs){
+	  	var query = Chat.find();
+	  	query.sort( { date : -1 } );
+	  	query.limit(page_limit);
+	  	query.exec(function(err, docs){
 	  	  socket.emit('msg open', docs);
 	  	});
 	  });
@@ -72,8 +76,11 @@ var chat = io
 
 	  	Chat.remove({ _id: msg._id }, function(err) {
 
+	  	  var query = Chat.find();
+	  	  query.sort( { date : -1 } );
+	  	  query.limit(page_limit);
 		  // ...
-		  Chat.find(function(err, docs){
+		  query.exec(function(err, docs){
 	  	  	socket.emit('msg open', docs);
 	  	  	socket.broadcast.emit('msg open', docs);
 		  });
