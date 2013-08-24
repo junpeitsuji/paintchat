@@ -8,6 +8,20 @@ $(function() {
     chat.emit('msg update');
   });
 
+  chat.on('user connected', function (msg) {
+    var obj = $('#chat-alert').html('<small>'+msg+' さんが入室しました。</small>').css('display', 'none').fadeIn('slow');
+    setTimeout(function () {
+      obj.fadeOut('slow');
+    } ,3000);
+  });
+
+  chat.on('user disconnected', function (msg) {
+    var obj = $('#chat-alert').html('<small>'+msg+' さんが退室しました。</small>').css('display', 'none').fadeIn('slow');
+    setTimeout(function () {
+      obj.fadeOut('slow');
+    } ,3000);
+  });
+
   // btn ボタンがクリックされたとき
   $('#chat #submit').click(function() {
     var message = $('#chat #message').val();

@@ -13,6 +13,8 @@ var Chat = models.Chat;
 var chat = io
 	.of('/chat')
 	.on('connection', function (socket) {
+	  console.log(socket.id);
+	  socket.broadcast.emit('user connected', socket.id);
 
 	  // クライアントから msg update が届いたとき、DB内のメッセージを取得して送信
 	  socket.on('msg update', function(){
@@ -69,6 +71,7 @@ var chat = io
 
 	  // クライアントから接続が切断されたとき
 	  socket.on('disconnect', function() {
+	  	socket.broadcast.emit('user disconnected', socket.id);
 	  	console.log('disconnected');
 	  });
 
