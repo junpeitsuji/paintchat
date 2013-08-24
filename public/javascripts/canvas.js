@@ -14,6 +14,8 @@ $(function() {
   var penWidth = 10;
   var ctx;
 
+  var title_text = $('#title h1').html();
+
   clear();
 
   // サーバーの接続が成功したとき
@@ -43,6 +45,10 @@ $(function() {
     } else {
       var object = $('#image #list');
       object.empty();
+
+      var src = msg[0].src;
+
+      $('#title h1').html($('<h1 class="text-info">'+title_text+' <img src="'+src+'" style="height:40px; border:solid 1px #ddd;" alt="" /></h1>'));
 
       var frag = document.createDocumentFragment();
       $.each(msg, function(key, value){
