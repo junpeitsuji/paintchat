@@ -51,7 +51,7 @@ $(function() {
 
   // チャットサーバーから msg push されたとき
   chat.on('msg push', function (msg) {
-    var date = msg.date;
+    var date = new Date(msg.date).toLocaleString();
     var message = msg.message;
     message = message.replace(/(http:\/\/[\x21-\x7e]+)/gi, "<a href='$1' target=\"_blank\">$1</a>");  
     message = message.replace(/(https:\/\/[\x21-\x7e]+)/gi, "<a href='$1' target=\"_blank\">$1</a>");  
@@ -90,7 +90,7 @@ $(function() {
       var frag = document.createDocumentFragment();
       $.each(msg, function(key, value){
 
-        var date = value.date;
+        var date = new Date(value.date).toLocaleString();
         var message = value.message;
         message = message.replace(/(http:\/\/[\x21-\x7e]+)/gi, "<a href='$1' target=\"_blank\">$1</a>");  
         message = message.replace(/(https:\/\/[\x21-\x7e]+)/gi, "<a href='$1' target=\"_blank\">$1</a>");  
