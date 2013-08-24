@@ -41,10 +41,30 @@ $(function() {
       $('#image #list').empty();
         return;
     } else {
-      $('#image #list').empty();
+      var object = $('#image #list');
+      object.empty();
+
+      var frag = document.createDocumentFragment();
       $.each(msg, function(key, value){
-        $('#image #list').append($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+value.src+"\"><img src=\""+value.src+"\" class=\"image-thumbnail\" /></a><span class=\"muted thumbnail-title\"><small>"+value.src+"</small></span><span id=\""+value.src+"\" class=\"thumbnail-icon-trash\"><i class=\"icon-trash\"></i></span></li>").css("display", "none").fadeIn("slow"));
+        var src = value.src;
+
+        var newLi = "<li class=\"image-box span3\">" 
+            + "<a class=\"thumbnail\" href=\""+src+"\">" 
+              + "<img src=\""+src+"\" class=\"image-thumbnail\" />"
+            + "</a>"
+            + "<span class=\"muted thumbnail-title\">"
+              + "<small>"+src+"</small>"
+            +"</span>"
+            +"<span id=\""+src+"\" class=\"thumbnail-icon-trash\">"
+              + "<i class=\"icon-trash\"></i>"
+            + "</span>"
+          +"</li>";
+
+        frag.appendChild($(newLi)[0]);
       });   
+
+      object[0].appendChild(frag);
+      object.css("display", "none").fadeIn("slow");
     }
 
     // delete ボタンがクリックされたとき
@@ -203,9 +223,22 @@ $(function() {
 
   // paint サーバーから img push されたとき
   paint.on('img push', function (msg) {
-    //document.getElementById("canvasCopy").pre = "<a href=\""+msg+"\">download link</a>";
-    var date = new Date();
-    $('#image #list').prepend($("<li class=\"image-box span3\"><a class=\"thumbnail\" href=\""+msg+"\"><img src=\""+msg+"\" class=\"image-thumbnail\" /></a><span class=\"muted thumbnail-title\"><small>"+msg+"</small></span><span id=\""+msg+"\" class=\"thumbnail-icon-trash\"><i class=\"icon-trash\"></i></span></li>").css("display", "none").fadeIn("slow"));
+    
+    var src = msg;
+
+    var newLi = "<li class=\"image-box span3\">" 
+            + "<a class=\"thumbnail\" href=\""+src+"\">" 
+              + "<img src=\""+src+"\" class=\"image-thumbnail\" />"
+            + "</a>"
+            + "<span class=\"muted thumbnail-title\">"
+              + "<small>"+src+"</small>"
+            +"</span>"
+            +"<span id=\""+src+"\" class=\"thumbnail-icon-trash\">"
+              + "<i class=\"icon-trash\"></i>"
+            + "</span>"
+          +"</li>";
+
+    $('#image #list').prepend($(newLi).css("display", "none").fadeIn("slow"));
 
       // delete ボタンがクリックされたとき
     $('.thumbnail-icon-trash').click(function(){

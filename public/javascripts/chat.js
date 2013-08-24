@@ -84,7 +84,10 @@ $(function() {
     if(msg.length == 0){
         return;
     } else {
-      $('#chat #list').empty();
+      var object = $('#chat #list');
+      object.empty();
+
+      var frag = document.createDocumentFragment();
       $.each(msg, function(key, value){
 
         var date = value.date;
@@ -95,7 +98,7 @@ $(function() {
         var _id = value._id;
         //$('#chat #list').prepend($('<dt>' + date + '</dt><dd>' + msg + '</dd>').css("display", "none").fadeIn("slow"));
 
-        var html = '<li class="span3 chat-list-border">'
+        var newLi = '<li class="span3 chat-list-border">'
             + '<div class=" chat-list-box">'
             + '<div class=" chat-list-text">' + message + '</div>'
             + '<div class=" chat-list-date"><small>'+ date +'</small></div>'
@@ -103,9 +106,11 @@ $(function() {
             + '</div>'
             + '</li>';
 
-        //$('#chat #list').prepend($('<dt>' + value.date + '</dt><dd>' + value.message + '</dd>')).css("display", "none").fadeIn("slow");
-        $('#chat #list').append($(html)).css("display", "none").fadeIn("slow");
+        frag.appendChild($(newLi)[0]);
+  
       });   
+      object[0].appendChild(frag);
+      object.css("display", "none").fadeIn("slow");
     
       $('.chat-list-icon').click(function(){
         var _id = $(this).attr("id");
