@@ -17,5 +17,4 @@ socket.io を使ってキャンバスに描いた絵やチャットメッセー�
 browse "[http://localhost:3000/](http://localhost:3000/)"
 
 ## 補足説明
-
-#paintchat についての補足 - togetter - [http://togetter.com/li/612626](http://togetter.com/li/612626)
+    paintchat についての補足 - togetter - [http://togetter.com/li/612626](http://togetter.com/li/612626)
